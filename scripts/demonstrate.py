@@ -1,6 +1,12 @@
 #!/usr/bin/env python3
 import sys
-sys.path.append('/home/vibhav/localization_ws/devel/lib/')
+import os
+path = os.popen("rospack find vid_submission").read().split("/")
+path.pop()
+path.pop()
+path = "/".join(path)
+path = path + "/devel/lib"
+sys.path.append(path)
 from time import sleep
 import motion_controller as m
 import rospy
@@ -101,6 +107,6 @@ DEPTHTOPIC = "/pose"
 MSGTYPE = Pose
 rospy.init_node("Bot")
 rospy.Subscriber(DEPTHTOPIC,MSGTYPE,callback=updateDepth)
-movementThread = threading.Thread(target=movement)
+movementThread = threading.Thread(target=movement,daemon=True)
 movementThread.start()
 rospy.spin()
