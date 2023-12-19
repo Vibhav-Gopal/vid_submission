@@ -1,0 +1,4 @@
+<launch>
+<node name = "demonstrate" pkg = "vid_submission" type = "demonstrate.py">
+</node>
+</launch>
